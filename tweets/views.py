@@ -5,5 +5,4 @@ def home_view(request):
     return HttpResponse("<h1>Hello World</h1>")
 
 def tweet_detail_view(request, tweet_id):
-    print("Tweet id %d" % (tweet_id,))
-    return HttpResponse("Hello World!")
+    return HttpResponse(f"Hello World! {tweet_id}")
