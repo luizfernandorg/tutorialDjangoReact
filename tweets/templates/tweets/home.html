@@ -8,10 +8,20 @@ This is amazing!!!
 Welcome to Tweetme 2
 
 <div id="tweets">
-    Replace me
+    Loading...
 </div>
 
 <script>
+    const tweetsElement = document.getElementById("tweets")
+    //tweetsElement.innerHTML = "Loading..."
+    //var el1 = "<h1>Hi there 1</h1>"
+    //var el2 = "<h1>Hi there 2</h1>"
+    //var el3 = "<h1>Hi there 3</h1>"
+    //tweetsElement.innerHTML = el1 + el2 + el3
+    function formatTweetElement(tweet){
+        var finalTweetStr = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p></div>"
+        return finalTweetStr
+    }
     const xhr = new XMLHttpRequest()
     const method = 'GET' // "POST"
     const url = "/tweets"
@@ -21,8 +31,15 @@ Welcome to Tweetme 2
     xhr.open(method, url)
     xhr.onload = function() {
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response
-        console.log(listedItems)
+        const listedItems = serverResponse.response
+        var finalTweetStr = ""
+        var i;
+        for (i=0; i<listedItems.length;i++){
+            var tweetObj = listedItems[i]
+            var currentItem = formatTweetElement(listedItems[i])
+            finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
     }
 
     xhr.send()
