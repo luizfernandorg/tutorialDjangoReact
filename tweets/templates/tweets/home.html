@@ -5,5 +5,26 @@ This is amazing!!!
 {% endblock head_title %}
 
 {% block content %}
-<h1> Hello from the template</h1>
+Welcome to Tweetme 2
+
+<div id="tweets">
+    Replace me
+</div>
+
+<script>
+    const xhr = new XMLHttpRequest()
+    const method = 'GET' // "POST"
+    const url = "/tweets"
+    const responseType = "json"
+
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+        const serverResponse = xhr.response
+        var listedItems = serverResponse.response
+        console.log(listedItems)
+    }
+
+    xhr.send()
+</script>
 {% endblock content %}
