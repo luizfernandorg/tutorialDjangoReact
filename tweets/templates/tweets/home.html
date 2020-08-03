@@ -5,9 +5,15 @@ This is amazing!!!
 {% endblock head_title %}
 
 {% block content %}
-Welcome to Tweetme 2
 
-<div id="tweets">
+<div class='row text-center'>
+    <div class='col'>
+        <h1>Welcome to Tweetme 2</h1>
+    </div>
+</div>
+
+
+<div class='row' id="tweets">
     Loading...
 </div>
 
@@ -18,8 +24,21 @@ Welcome to Tweetme 2
     //var el2 = "<h1>Hi there 2</h1>"
     //var el3 = "<h1>Hi there 3</h1>"
     //tweetsElement.innerHTML = el1 + el2 + el3
+    function handleDidLike(tweet_id, currentCount){
+        console.log(tweet_id, currentCount)
+        return
+    }
+
+    function LikeBtn(tweet){
+        return "<button class='btn btn-primary btn-sm' onclick='handleDidLike(" +
+        tweet.id + "," + tweet.likes + ")'>" + tweet.likes + " Likes </button>"
+    }
+
     function formatTweetElement(tweet){
-        var finalTweetStr = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p></div>"
+        var finalTweetStr = "<div class='col-12 col-md-10 mx-auto border rouded py-3 mb-4 tweet' id='tweet-" + tweet.id 
+        + "'><p>" + tweet.content +
+        "</p><div class='btn-group'>" + LikeBtn(tweet) +
+        "</div></div>"
         return finalTweetStr
     }
     const xhr = new XMLHttpRequest()
@@ -36,12 +55,12 @@ Welcome to Tweetme 2
         var i;
         for (i=0; i<listedItems.length;i++){
             var tweetObj = listedItems[i]
-            var currentItem = formatTweetElement(listedItems[i])
+            var currentItem = formatTweetElement(tweetObj)
             finalTweetStr += currentItem
         }
         tweetsElement.innerHTML = finalTweetStr
     }
-    // Continue at 1:27:08
+    // Continue at 1:36:56
     xhr.send()
 </script>
 {% endblock content %}
